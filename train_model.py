@@ -1,8 +1,7 @@
 """
-Trains the baseline housing-price model and writes two artifacts that the
-rest of the pipeline depends on:
+Trains the baseline model on the real Windsor Housing dataset and writes:
   - model.pkl            the trained sklearn model
-  - reference_data.csv   the training distribution, used later as the
+  - reference_data.csv   the full real dataset, used later as the
                           "ground truth" the drift detector compares
                           live traffic against
 """
@@ -11,15 +10,15 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 
-from data_gen import FEATURE_COLUMNS, generate_housing_data
+from data_gen import FEATURE_COLUMNS, TARGET_COLUMN, load_real_data
 
 
 def main():
-    df = generate_housing_data(n=3000, drift=False, seed=42)
-    X, y = df[FEATURE_COLUMNS], df["price"]
+    df = load_real_data()
+    X, y = df[FEATURE_COLUMNS], df[TARGET_COLUMN]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = RandomForestRegressor(n_estimators=200, max_depth=12, random_state=42)
+    model = RandomForestRegressor(n_estimators=300, max_depth=10, min_samples_leaf=2, random_state=42, n_jobs=-1)
     model.fit(X_train, y_train)
 
     preds = model.predict(X_test)
@@ -30,7 +29,7 @@ def main():
 
     joblib.dump(model, "model.pkl")
     df.to_csv("reference_data.csv", index=False)
-    print("Saved model.pkl and reference_data.csv")
+    print(f"Saved model.pkl and reference_data.csv ({len(df)} real rows, Windsor Housing dataset)")
 
 
 if __name__ == "__main__":

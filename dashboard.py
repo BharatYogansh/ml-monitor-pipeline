@@ -18,7 +18,7 @@ import db
 st.set_page_config(page_title="ML Model Health Monitor", layout="wide")
 
 st.title("Live ML Model Health Monitor")
-st.caption("Housing price predictor served via FastAPI, monitored for data drift with the KS test.")
+st.caption("Windsor Housing price predictor served via FastAPI, monitored for data drift with the KS test.")
 
 if st.button("Run drift check now"):
     subprocess.run([sys.executable, "drift_detector.py"])
@@ -65,21 +65,22 @@ if drift_report and drift_report.get("column_details"):
     st.subheader("Feature-level drift detail")
     detail_df = pd.DataFrame(drift_report["column_details"]).T
     detail_df.index.name = "feature"
-    st.dataframe(detail_df, use_container_width=True)
+    st.dataframe(detail_df, width="stretch")
 
 if not logs.empty:
     st.subheader("Requests over time")
     logs["timestamp"] = pd.to_datetime(logs["timestamp"])
     logs["cumulative"] = range(1, len(logs) + 1)
     fig1 = px.line(logs, x="timestamp", y="cumulative", title="Cumulative predictions served")
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, width="stretch")
 
     st.subheader("Incoming feature distributions (most recent 200)")
     try:
         reference = pd.read_csv("reference_data.csv")
         recent = db.fetch_recent(200)
         feature = st.selectbox(
-            "Feature", ["size_sqft", "bedrooms", "age_years", "location_score", "distance_to_city_km"]
+            "Feature",
+            ["lotsize", "bedrooms", "bathrms", "stories", "driveway", "recroom", "fullbase", "gashw", "airco", "garagepl", "prefarea"],
         )
         combined = pd.concat(
             [
@@ -95,7 +96,7 @@ if not logs.empty:
             opacity=0.6,
             title=f"{feature}: training vs. live traffic",
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width="stretch")
     except FileNotFoundError:
         st.warning("reference_data.csv not found — run train_model.py first.")
 else:

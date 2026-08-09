@@ -16,7 +16,10 @@ from pydantic import BaseModel, Field
 
 import db
 
-FEATURE_COLUMNS = ["size_sqft", "bedrooms", "age_years", "location_score", "distance_to_city_km"]
+FEATURE_COLUMNS = [
+    "lotsize", "bedrooms", "bathrms", "stories",
+    "driveway", "recroom", "fullbase", "gashw", "airco", "garagepl", "prefarea",
+]
 MODEL = None
 
 
@@ -28,15 +31,21 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Housing Price Predictor with Live Monitoring", lifespan=lifespan)
+app = FastAPI(title="Windsor Housing Price Predictor with Live Monitoring", lifespan=lifespan)
 
 
 class HouseFeatures(BaseModel):
-    size_sqft: float = Field(..., gt=0)
-    bedrooms: int = Field(..., ge=0)
-    age_years: float = Field(..., ge=0)
-    location_score: float = Field(..., ge=0, le=10)
-    distance_to_city_km: float = Field(..., ge=0)
+    lotsize: float = Field(..., gt=0, description="Lot size, sq ft")
+    bedrooms: int = Field(..., ge=1, le=10)
+    bathrms: int = Field(..., ge=1, le=5)
+    stories: int = Field(..., ge=1, le=4)
+    driveway: int = Field(..., ge=0, le=1, description="1 = has driveway")
+    recroom: int = Field(..., ge=0, le=1, description="1 = has recreation room")
+    fullbase: int = Field(..., ge=0, le=1, description="1 = has full basement")
+    gashw: int = Field(..., ge=0, le=1, description="1 = gas water heating")
+    airco: int = Field(..., ge=0, le=1, description="1 = has central air conditioning")
+    garagepl: int = Field(..., ge=0, le=4, description="number of garage places")
+    prefarea: int = Field(..., ge=0, le=1, description="1 = in preferred neighborhood")
 
 
 class PredictionResponse(BaseModel):

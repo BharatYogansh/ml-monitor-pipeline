@@ -1,6 +1,6 @@
 """
 Tiny SQLite helper used by the API (to log predictions) and by the drift
-detector / dashboard (to read them back). Kept dependency-free on purpose —
+detector / dashboard (to read them back). Kept dependency-free on purpose -
 this is a demo project, not a claim that SQLite belongs in real production.
 """
 import sqlite3
@@ -14,11 +14,17 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS predictions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp TEXT NOT NULL,
-    size_sqft REAL,
+    lotsize REAL,
     bedrooms INTEGER,
-    age_years REAL,
-    location_score REAL,
-    distance_to_city_km REAL,
+    bathrms INTEGER,
+    stories INTEGER,
+    driveway INTEGER,
+    recroom INTEGER,
+    fullbase INTEGER,
+    gashw INTEGER,
+    airco INTEGER,
+    garagepl INTEGER,
+    prefarea INTEGER,
     prediction REAL,
     latency_ms REAL
 );
@@ -44,8 +50,8 @@ def insert_prediction(row: dict):
     with get_conn() as conn:
         conn.execute(
             """INSERT INTO predictions
-            (timestamp, size_sqft, bedrooms, age_years, location_score, distance_to_city_km, prediction, latency_ms)
-            VALUES (:timestamp, :size_sqft, :bedrooms, :age_years, :location_score, :distance_to_city_km, :prediction, :latency_ms)""",
+            (timestamp, lotsize, bedrooms, bathrms, stories, driveway, recroom, fullbase, gashw, airco, garagepl, prefarea, prediction, latency_ms)
+            VALUES (:timestamp, :lotsize, :bedrooms, :bathrms, :stories, :driveway, :recroom, :fullbase, :gashw, :airco, :garagepl, :prefarea, :prediction, :latency_ms)""",
             row,
         )
         conn.commit()

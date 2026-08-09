@@ -3,7 +3,7 @@ Compares recently logged prediction inputs against the reference training
 distribution, per feature, using the two-sample Kolmogorov-Smirnov test.
 
 A low p-value (< ALPHA) means the recent feature values are statistically
-unlikely to come from the same distribution as the training data — i.e.
+unlikely to come from the same distribution as the training data - i.e.
 the input data has drifted, and the model's predictions can no longer be
 trusted the way they were at training time.
 
@@ -18,7 +18,10 @@ from scipy.stats import ks_2samp
 
 import db
 
-FEATURE_COLUMNS = ["size_sqft", "bedrooms", "age_years", "location_score", "distance_to_city_km"]
+FEATURE_COLUMNS = [
+    "lotsize", "bedrooms", "bathrms", "stories",
+    "driveway", "recroom", "fullbase", "gashw", "airco", "garagepl", "prefarea",
+]
 REFERENCE_PATH = "reference_data.csv"
 REPORT_PATH = "drift_report.json"
 ALPHA = 0.05
