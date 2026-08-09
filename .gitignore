@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+model.pkl
+reference_data.csv
+logs.db
+drift_report.json
+.DS_Store
