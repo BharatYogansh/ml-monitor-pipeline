@@ -1,5 +1,11 @@
 # Live ML Model Health Monitor
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![scikit--learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikitlearn&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+
 A housing-price prediction model, trained on real housing sale data, deployed as a
 FastAPI service — with a drift-detection layer and a live Streamlit dashboard that
 watch whether incoming data still matches what the model was trained on. Most student
