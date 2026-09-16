@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-09-16T15:33:16.864268+00:00",
+  "sample_size": 100,
+  "drift_detected": true,
+  "drifted_columns": [
+    "lotsize",
+    "bedrooms",
+    "bathrms",
+    "airco",
+    "garagepl",
+    "prefarea"
+  ],
+  "column_details": {
+    "lotsize": {
+      "ks_statistic": 0.406,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 5150.27,
+      "recent_mean": 8408.85
+    },
+    "bedrooms": {
+      "ks_statistic": 0.374,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 2.97,
+      "recent_mean": 3.76
+    },
+    "bathrms": {
+      "ks_statistic": 0.4363,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 1.29,
+      "recent_mean": 1.93
+    },
+    "stories": {
+      "ks_statistic": 0.0342,
+      "p_value": 0.99989,
+      "drifted": false,
+      "reference_mean": 1.81,
+      "recent_mean": 1.82
+    },
+    "driveway": {
+      "ks_statistic": 0.079,
+      "p_value": 0.63446,
+      "drifted": false,
+      "reference_mean": 0.86,
+      "recent_mean": 0.78
+    },
+    "recroom": {
+      "ks_statistic": 0.0077,
+      "p_value": 1.0,
+      "drifted": false,
+      "reference_mean": 0.18,
+      "recent_mean": 0.17
+    },
+    "fullbase": {
+      "ks_statistic": 0.0298,
+      "p_value": 1.0,
+      "drifted": false,
+      "reference_mean": 0.35,
+      "recent_mean": 0.32
+    },
+    "gashw": {
+      "ks_statistic": 0.0058,
+      "p_value": 1.0,
+      "drifted": false,
+      "reference_mean": 0.05,
+      "recent_mean": 0.04
+    },
+    "airco": {
+      "ks_statistic": 0.4032,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 0.32,
+      "recent_mean": 0.72
+    },
+    "garagepl": {
+      "ks_statistic": 0.3095,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 0.69,
+      "recent_mean": 1.15
+    },
+    "prefarea": {
+      "ks_statistic": 0.4656,
+      "p_value": 0.0,
+      "drifted": true,
+      "reference_mean": 0.23,
+      "recent_mean": 0.7
+    }
+  }
+}
