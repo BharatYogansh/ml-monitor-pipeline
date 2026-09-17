@@ -1,5 +1,6 @@
 # Live ML Model Health Monitor
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_App-success?style=flat&logo=streamlit&logoColor=white)](https://ml-monitor-pipeline-bhkaoymkleduelddg2gwao.streamlit.app/)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
 ![scikit--learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikitlearn&logoColor=white)
